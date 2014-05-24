@@ -1,0 +1,7 @@
+config.tx_extbase.persistence.classes {
+	CPSIT\HostsPattern\Domain\Model\Domain {
+		mapping {
+			tableName = sys_domain
+		}
+	}
+}
