@@ -23,29 +23,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Domain model
- */
-class Tx_HostsPattern_Domain_Model_Domain extends Tx_Extbase_DomainObject_AbstractEntity {
-
-	/**
-	 * @var string
-	 */
-	protected $domainName;
-
-	/**
-	 * @return string
-	 */
-	public function getDomainName() {
-		return $this->domainName;
-	}
-
-	/**
-	 * @param string $domainName
-	 * @return void
-	 */
-	public function setDomainName($domainName) {
-		$this->domainName = $domainName;
-	}
-
-}
+return array(
+	'Tx_Extbase_Persistence_QuerySettings' => 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings',
+);

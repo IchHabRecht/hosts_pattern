@@ -1,6 +1,4 @@
 <?php
-namespace CPSIT\HostsPattern\Tests\Service;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -25,12 +23,12 @@ namespace CPSIT\HostsPattern\Tests\Service;
  ***************************************************************/
 
 /**
- * Test case for \CPSIT\HostsPattern\Service\PatternService
+ * Test case for Tx_HostsPattern_Service_PatternService
  */
-class PatternServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 
 	/**
-	 * @var \CPSIT\HostsPattern\Service\PatternService
+	 * @var Tx_HostsPattern_Service_PatternService
 	 */
 	protected $fixture;
 
@@ -38,14 +36,14 @@ class PatternServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new \CPSIT\HostsPattern\Service\PatternService();
+		$this->fixture = new Tx_HostsPattern_Service_PatternService();
 	}
 
 	/**
 	 * @test
 	 */
 	public function generatePatternReturnsPatternForSimpleDomain() {
-		$domain = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain->setDomainName('example.com');
 
 		$this->assertSame('example\\.com', $this->fixture->generatePattern(array($domain)));
@@ -55,9 +53,9 @@ class PatternServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function generatePatternReturnsPatternForSameDomainsWithDifferentSubdomains() {
-		$domain1 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain1->setDomainName('www.example.com');
-		$domain2 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain2->setDomainName('wwwt.example.com');
 		$domainArray = array(
 			$domain1,
@@ -71,9 +69,9 @@ class PatternServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function generatePatternReturnsPatternForSameDomainsIncludingEmptySubdomain() {
-		$domain1 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain1->setDomainName('example.com');
-		$domain2 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain2->setDomainName('www.example.com');
 		$domainArray = array(
 			$domain1,
@@ -87,9 +85,9 @@ class PatternServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function generatePatternReturnsPatternForDifferentDomains() {
-		$domain1 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain1->setDomainName('www.example.com');
-		$domain2 = new \CPSIT\HostsPattern\Domain\Model\Domain();
+		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
 		$domain2->setDomainName('www.domain.com');
 		$domainArray = array(
 			$domain1,

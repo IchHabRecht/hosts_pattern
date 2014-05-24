@@ -1,6 +1,4 @@
 <?php
-namespace CPSIT\HostsPattern\Domain\Repository;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -28,14 +26,14 @@ namespace CPSIT\HostsPattern\Domain\Repository;
 /**
  * Repository for domain records
  */
-class DomainRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class Tx_HostsPattern_Domain_Repository_DomainRepository extends Tx_Extbase_Persistence_Repository {
 
 	/**
 	 * @return void
 	 */
 	public function initializeObject() {
-		/** @var \TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface $defaultQuerySettings */
-		$defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface');
+		/** @var Tx_Extbase_Persistence_QuerySettingsInterface $defaultQuerySettings */
+		$defaultQuerySettings = $this->objectManager->get('Tx_Extbase_Persistence_QuerySettingsInterface');
 		$defaultQuerySettings->setRespectStoragePage(FALSE);
 		$this->setDefaultQuerySettings($defaultQuerySettings);
 	}
