@@ -24,28 +24,24 @@
  ***************************************************************/
 
 /**
- * Domain model
+ * Class Tx_HostsPattern_ViewHelpers_Be_Buttons_IconViewHelper to render sprite icons
  */
-class Tx_HostsPattern_Domain_Model_Domain extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_HostsPattern_ViewHelpers_Be_Buttons_IconViewHelper extends Tx_Fluid_ViewHelpers_Be_Buttons_IconViewHelper {
 
 	/**
-	 * @var string
-	 */
-	protected $domainName;
-
-	/**
+	 * Renders an sprite icon
+	 *
+	 * @param string $uri
+	 * @param string $icon
+	 * @param string $title
 	 * @return string
 	 */
-	public function getDomainName() {
-		return $this->domainName;
+	public function render($uri = '', $icon = 'closedok', $title = '') {
+		$icon = t3lib_iconWorks::getSpriteIcon($icon, array('title' => $title));
+		if (empty($uri)) {
+			return $icon;
+		} else {
+			return '<a href="' . $uri . '">' . $icon . '</a>';
+		}
 	}
-
-	/**
-	 * @param string $domainName
-	 * @return void
-	 */
-	public function setDomainName($domainName) {
-		$this->domainName = $domainName;
-	}
-
 }

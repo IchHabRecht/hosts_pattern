@@ -1,6 +1,4 @@
 <?php
-namespace CPSIT\HostsPattern\Service;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -28,16 +26,16 @@ namespace CPSIT\HostsPattern\Service;
 /**
  * Service to generate regular expression pattern for trustedHostsPattern
  */
-class PatternService {
+class Tx_HostsPattern_Service_PatternService {
 
 	/**
-	 * @param \CPSIT\HostsPattern\Domain\Model\Domain[] $domainArray
+	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
 	 * @return string
 	 */
 	public function generatePattern($domainArray) {
 		if (empty($domainArray)) {
-			$domain = new \CPSIT\HostsPattern\Domain\Model\Domain();
-			$domain->setDomainName(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('HTTP_HOST'));
+			$domain = new Tx_HostsPattern_Domain_Model_Domain();
+			$domain->setDomainName(t3lib_div::getIndpEnv('HTTP_HOST'));
 			$domainArray = array($domain);
 		}
 
@@ -52,13 +50,13 @@ class PatternService {
 	}
 
 	/**
-	 * @param \CPSIT\HostsPattern\Domain\Model\Domain[] $domainArray
+	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
 	 * @return array
 	 */
 	protected function extractDomains($domainArray) {
 		$extractedDomainArray = array();
 
-		/** @var \CPSIT\HostsPattern\Domain\Model\Domain $domain */
+		/** @var Tx_HostsPattern_Domain_Model_Domain $domain */
 		foreach ($domainArray as $domain) {
 			$reverseHost = array_reverse(explode('.', $domain->getDomainName()));
 			$domainName = preg_quote($reverseHost[1] . '.' . $reverseHost[0]);

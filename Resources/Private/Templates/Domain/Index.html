@@ -1,20 +1,22 @@
+{namespace h=Tx_HostsPattern_ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="content">
-	<h1>Trusted Hosts Pattern</h1>
+	<h2>Trusted Hosts Pattern</h2>
 	<f:flashMessages renderMode="div" />
-	{f:count(subject: domains)} {f:if(condition: '{f:count(subject: domains)} == 1', then: ' domain was', else: ' domains were')} found:
+	<h3 class="uppercase">{f:count(subject: domains)} {f:if(condition: '{f:count(subject: domains)} == 1', then: ' domain was', else: ' domains were')} found</h3>
 	<ul>
 		<f:for each="{domains}" as="domain">
 			<li>{domain.domainName}</li>
 		</f:for>
 	</ul>
-	<h3>Generated pattern:</h3>
-
+	<br /><br />
+	<h3 class="uppercase">Generated pattern:</h3>
 	<p>{pattern}</p>
+	<br /><br />
 	<f:form method="post">
-		<button class="btn" name="tx_hostspattern_system_hostspatternhostspattern[write]">
-			<f:be.buttons.icon icon="actions-document-save" title="Write configuration" />
+		<button class="btn" name="tx_hostspattern_tools_hostspatternhostspattern[write]">
+			<h:be.buttons.icon icon="actions-document-save" title="Write configuration" />
 			Write configuration
 		</button>
 	</f:form>

@@ -4,18 +4,18 @@ if (!defined('TYPO3_MODE')) {
 }
 
 if (TYPO3_MODE === 'BE') {
-	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-		'CPSIT.hosts_pattern',
-		'system',
+	Tx_Extbase_Utility_Extension::registerModule(
+		'hosts_pattern',
+		'tools',
 		'HostsPattern',
-		'after:InstallInstall',
+		'',
 		array(
 			'Domain' => 'index',
 		),
 		array(
 			'access' => 'admin',
 			'icon' => 'EXT:hosts_pattern/ext_icon.gif',
-			'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xlf',
+			'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xml',
 		)
 	);
 }
