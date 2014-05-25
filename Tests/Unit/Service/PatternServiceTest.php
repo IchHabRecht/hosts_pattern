@@ -40,61 +40,88 @@ class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_B
 	}
 
 	/**
-	 * @test
+	 * @param array $domainArray
+	 * @return array
 	 */
-	public function generatePatternReturnsPatternForSimpleDomain() {
-		$domain = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain->setDomainName('example.com');
+	protected function getDomainObjectsFromArray(array $domainArray) {
+		$domainStorageArray = array();
+		foreach ($domainArray as $domain) {
+			$domainObject = new Tx_HostsPattern_Domain_Model_Domain();
+			$domainObject->setDomainName($domain);
+			$domainStorageArray[] = $domainObject;
+		}
+		unset($domain);
 
-		$this->assertSame('example\\.com', $this->fixture->generatePattern(array($domain)));
+		return $domainStorageArray;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function generatePatternDataProvider() {
+		return array(
+			'Simple domain' => array(
+				array(
+					'example.com',
+				),
+				'example\\.com',
+			),
+			'Same domain with different subdomains' => array(
+				array(
+					'www.example.com',
+					'wwwt.example.com',
+				),
+				'(www|wwwt)\\.example\\.com'
+			),
+			'Same domain without subdomain' => array(
+				array(
+					'example.com',
+					'www.example.com',
+				),
+				'(www\\.)?example\\.com'
+			),
+			'Two different domains' => array(
+				array(
+					'www.example.com',
+					'www.domain.com',
+				),
+				'(www\\.example\\.com|www\\.domain\\.com)',
+			),
+			'Two equal domains with extra domain' => array(
+				array(
+					'www.example.com',
+					'subdomain.example.com',
+					'www.domain.com',
+				),
+				'((www|subdomain)\\.example\\.com|www\\.domain\\.com)',
+			),
+			'Three equal domains without subdomain with extra domain' => array(
+				array(
+					'www.example.com',
+					'subdomain.example.com',
+					'example.com',
+					'www.domain.com',
+				),
+				'(((www|subdomain)\\.)?example\\.com|www\\.domain\\.com)',
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider generatePatternDataProvider
+	 */
+	public function generatePatternReturnsPatternForGivenDomains($domainArray, $expectedPattern) {
+		$this->assertSame($expectedPattern, $this->fixture->generatePattern($this->getDomainObjectsFromArray($domainArray)));
 	}
 
 	/**
 	 * @test
 	 */
-	public function generatePatternReturnsPatternForSameDomainsWithDifferentSubdomains() {
-		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain1->setDomainName('www.example.com');
-		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain2->setDomainName('wwwt.example.com');
-		$domainArray = array(
-			$domain1,
-			$domain2,
-		);
+	public function generatePatternReturnsHttpHostWithoutDomain() {
+		$_SERVER['HTTP_HOST'] = 'www.foo.bar';
 
-		$this->assertSame('(www|wwwt)\\.example\\.com', $this->fixture->generatePattern($domainArray));
-	}
-
-	/**
-	 * @test
-	 */
-	public function generatePatternReturnsPatternForSameDomainsIncludingEmptySubdomain() {
-		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain1->setDomainName('example.com');
-		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain2->setDomainName('www.example.com');
-		$domainArray = array(
-			$domain1,
-			$domain2,
-		);
-
-		$this->assertSame('(www\\.)?example\\.com', $this->fixture->generatePattern($domainArray));
-	}
-
-	/**
-	 * @test
-	 */
-	public function generatePatternReturnsPatternForDifferentDomains() {
-		$domain1 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain1->setDomainName('www.example.com');
-		$domain2 = new Tx_HostsPattern_Domain_Model_Domain();
-		$domain2->setDomainName('www.domain.com');
-		$domainArray = array(
-			$domain1,
-			$domain2,
-		);
-
-		$this->assertSame('(www\\.example\\.com|www\\.domain\\.com)', $this->fixture->generatePattern($domainArray));
+		$this->assertSame('www\\.foo\\.bar', $this->fixture->generatePattern(array()));
 	}
 
 }
