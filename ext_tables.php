@@ -18,4 +18,10 @@ if (TYPO3_MODE === 'BE') {
 			'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xml',
 		)
 	);
+
+	t3lib_extMgm::addTypoScript(
+		'hosts_pattern',
+		'setup',
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:hosts_pattern/Configuration/TypoScript/setup.txt">'
+	);
 }
