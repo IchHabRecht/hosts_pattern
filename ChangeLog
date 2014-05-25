@@ -1,4 +1,6 @@
+2014-05-25         [RELEASE] Release of hosts_pattern 1.2.0 (Nicole Cordes)
+2014-05-25 26cf045 [TASK] Improve unit tests (Nicole Cordes)
+2014-05-25 aa079f3 [TASK] Remove ext_typoscript_setup.txt (Nicole Cordes)
+
 2014-05-24         [RELEASE] Release of hosts_pattern 1.1.0 (Nicole Cordes)
 2014-05-24 2fa4993 [FEATURE] Backport to TYPO3 4.5 (Nicole Cordes)
-
-
