@@ -86,7 +86,7 @@ class Tx_HostsPattern_Service_PatternService {
 			$hasDomainWithoutSubdomain = TRUE;
 			$subdomainArray = array_filter($subdomainArray, 'strlen');
 		}
-		$hasMultipleSubdomains = count($subdomainArray) > 1 ? : FALSE;
+		$hasMultipleSubdomains = count($subdomainArray) > 1 ? TRUE : FALSE;
 		$pattern = ($hasMultipleSubdomains ? '(' : '') . implode('|', $subdomainArray) . ($hasMultipleSubdomains ? ')' : '');
 		if (!empty($subdomainArray)) {
 			$pattern .= '\\.';
