@@ -1,3 +1,6 @@
+2014-08-26         [RELEASE] Release of hosts_pattern 1.2.1 (Nicole Cordes)
+2014-08-26 acc20a6 [HOTFIX] Add support for PHP 5.2 (Nicole Cordes)
+
 2014-05-25         [RELEASE] Release of hosts_pattern 1.2.0 (Nicole Cordes)
 2014-05-25 26cf045 [TASK] Improve unit tests (Nicole Cordes)
 2014-05-25 aa079f3 [TASK] Remove ext_typoscript_setup.txt (Nicole Cordes)
