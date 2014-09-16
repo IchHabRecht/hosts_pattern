@@ -1,3 +1,6 @@
+2014-09-16         [RELEASE] Release of hosts_pattern 1.2.2 (Nicole Cordes)
+2014-09-16 180e1a9 [HOTFIX] Reverse array before implode to reorder subdomains (Nicole Cordes)
+
 2014-08-26         [RELEASE] Release of hosts_pattern 1.2.1 (Nicole Cordes)
 2014-08-26 acc20a6 [HOTFIX] Add support for PHP 5.2 (Nicole Cordes)
 
