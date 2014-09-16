@@ -80,6 +80,13 @@ class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_B
 				),
 				'(www\\.)?example\\.com'
 			),
+			'Same domain with multiple subdomains' => array(
+				array(
+					'www.example.com',
+					'www.secure.example.com',
+				),
+				'(www|www\\.secure)\\.example\\.com',
+			),
 			'Two different domains' => array(
 				array(
 					'www.example.com',

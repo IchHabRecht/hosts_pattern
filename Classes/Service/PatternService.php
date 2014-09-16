@@ -63,7 +63,7 @@ class Tx_HostsPattern_Service_PatternService {
 			unset($reverseHost[0], $reverseHost[1]);
 			$subdomain = '';
 			if (!empty($reverseHost)) {
-				$subdomain = implode('.', $reverseHost);
+				$subdomain = implode('.', array_reverse($reverseHost));
 			}
 			if (!is_array($extractedDomainArray[$domainName])) {
 				$extractedDomainArray[$domainName] = array();
