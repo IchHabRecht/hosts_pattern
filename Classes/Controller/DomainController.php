@@ -67,7 +67,7 @@ class Tx_HostsPattern_Controller_DomainController extends Tx_Extbase_MVC_Control
 		$pattern = $this->patternService->generatePattern($domains);
 
 		if ($this->request->hasArgument('write')) {
-			if (version_compare(TYPO3_branch, '6.0', '<')) {
+			if (version_compare(TYPO3_branch, '6.2', '<')) {
 				/** @var t3lib_install $instObj */
 				$instObj = t3lib_div::makeInstance('t3lib_install');
 				$instObj->allowUpdateLocalConf = 1;
