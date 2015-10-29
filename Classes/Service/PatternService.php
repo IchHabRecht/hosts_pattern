@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Service;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,20 +25,21 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Model\Domain;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Service to generate regular expression pattern for trustedHostsPattern
  */
-class Tx_HostsPattern_Service_PatternService {
+class PatternService {
 
 	/**
-	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
+	 * @param Domain[] $domainArray
 	 * @return string
 	 */
 	public function generatePattern($domainArray) {
 		if (empty($domainArray)) {
-			$domain = new Tx_HostsPattern_Domain_Model_Domain();
+			$domain = new Domain();
 			$domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
 			$domainArray = array($domain);
 		}
@@ -52,13 +55,13 @@ class Tx_HostsPattern_Service_PatternService {
 	}
 
 	/**
-	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
+	 * @param Domain[] $domainArray
 	 * @return array
 	 */
 	protected function extractDomains($domainArray) {
 		$extractedDomainArray = array();
 
-		/** @var Tx_HostsPattern_Domain_Model_Domain $domain */
+		/** @var Domain $domain */
 		foreach ($domainArray as $domain) {
 			$reverseHost = array_reverse(explode('.', $domain->getDomainName()));
 			$domainName = preg_quote($reverseHost[1] . '.' . $reverseHost[0]);

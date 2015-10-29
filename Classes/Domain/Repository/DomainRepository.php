@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Domain\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,14 +31,14 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * Repository for domain records
  */
-class Tx_HostsPattern_Domain_Repository_DomainRepository extends Repository {
+class DomainRepository extends Repository {
 
 	/**
 	 * @return void
 	 */
 	public function initializeObject() {
 		/** @var QuerySettingsInterface $defaultQuerySettings */
-		$defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface');
+		$defaultQuerySettings = $this->objectManager->get(QuerySettingsInterface::class);
 		$defaultQuerySettings->setRespectStoragePage(FALSE);
 		$this->setDefaultQuerySettings($defaultQuerySettings);
 	}

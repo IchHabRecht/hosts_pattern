@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +30,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * Domain model
  */
-class Tx_HostsPattern_Domain_Model_Domain extends AbstractEntity {
+class Domain extends AbstractEntity {
 
 	/**
 	 * @var string

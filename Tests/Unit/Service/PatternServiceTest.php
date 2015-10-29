@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Tests\Unit;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -22,13 +24,17 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Model\Domain;
+use IchHabRecht\HostsPattern\Service\PatternService;
+use TYPO3\CMS\Core\Tests\BaseTestCase;
+
 /**
- * Test case for Tx_HostsPattern_Service_PatternService
+ * Test case for IchHabRecht\HostsPattern\Service\PatternService
  */
-class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class PatternServiceTest extends BaseTestCase {
 
 	/**
-	 * @var Tx_HostsPattern_Service_PatternService
+	 * @var PatternService
 	 */
 	protected $fixture;
 
@@ -36,7 +42,7 @@ class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_B
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new Tx_HostsPattern_Service_PatternService();
+		$this->fixture = new PatternService();
 	}
 
 	/**
@@ -46,7 +52,7 @@ class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_B
 	protected function getDomainObjectsFromArray(array $domainArray) {
 		$domainStorageArray = array();
 		foreach ($domainArray as $domain) {
-			$domainObject = new Tx_HostsPattern_Domain_Model_Domain();
+			$domainObject = new Domain();
 			$domainObject->setDomainName($domain);
 			$domainStorageArray[] = $domainObject;
 		}
@@ -117,6 +123,9 @@ class Tx_HostsPattern_Service_PatternServiceTest extends Tx_Extbase_Tests_Unit_B
 	/**
 	 * @test
 	 * @dataProvider generatePatternDataProvider
+	 *
+	 * @param array $domainArray
+	 * @param array $expectedPattern
 	 */
 	public function generatePatternReturnsPatternForGivenDomains($domainArray, $expectedPattern) {
 		$this->assertSame($expectedPattern, $this->fixture->generatePattern($this->getDomainObjectsFromArray($domainArray)));

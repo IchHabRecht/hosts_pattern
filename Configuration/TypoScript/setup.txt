@@ -1,5 +1,5 @@
 config.tx_extbase.persistence.classes {
-	Tx_HostsPattern_Domain_Model_Domain {
+	IchHabRecht\HostsPattern\Domain\Model\Domain {
 		mapping {
 			tableName = sys_domain
 			columns {

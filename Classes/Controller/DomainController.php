@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,6 +25,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Repository\DomainRepository;
+use IchHabRecht\HostsPattern\Service\PatternService;
+use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -32,28 +38,27 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class DomainController extends ActionController {
 
 	/**
-	 * @var Tx_HostsPattern_Domain_Repository_DomainRepository
+	 * @var DomainRepository;
 	 */
 	protected $domainRepository;
 
 	/**
-	 * @var Tx_HostsPattern_Service_PatternService
+	 * @var PatternService
 	 */
 	protected $patternService;
 
 	/**
-	 * @param Tx_HostsPattern_Domain_Repository_DomainRepository $domainRepository
-	 * @return void
+	 * @param DomainRepository $domainRepository
 	 */
-	public function injectDomainRepository(Tx_HostsPattern_Domain_Repository_DomainRepository $domainRepository) {
+	public function injectDomainRepository(DomainRepository $domainRepository) {
 		$this->domainRepository = $domainRepository;
 	}
 
 	/**
-	 * @param Tx_HostsPattern_Service_PatternService $patternService
+	 * @param PatternService $patternService
 	 * @return void
 	 */
-	public function injectPatternService(Tx_HostsPattern_Service_PatternService $patternService) {
+	public function injectPatternService(PatternService $patternService) {
 		$this->patternService = $patternService;
 	}
 
@@ -63,15 +68,15 @@ class DomainController extends ActionController {
 	public function indexAction() {
 		$domains = $this->domainRepository->findAll();
 		if (!count($domains)) {
-			$domain = $this->objectManager->get('Tx_HostsPattern_Domain_Model_Domain');
+			$domain = $this->objectManager->get(Domain::class);
 			$domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
 			$domains = array($domain);
 		}
 		$pattern = $this->patternService->generatePattern($domains);
 
 		if ($this->request->hasArgument('write')) {
-			/** @var \TYPO3\CMS\Core\Configuration\ConfigurationManager $configurationManager */
-			$configurationManager = $this->objectManager->get('TYPO3\\CMS\\Core\\Configuration\\ConfigurationManager');
+			/** @var ConfigurationManager $configurationManager */
+			$configurationManager = $this->objectManager->get(ConfigurationManager::class);
 			$configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
 			$this->addFlashMessage(
 				htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
