@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Service;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,80 +25,88 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Model\Domain;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Service to generate regular expression pattern for trustedHostsPattern
  */
-class Tx_HostsPattern_Service_PatternService {
+class PatternService
+{
 
-	/**
-	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
-	 * @return string
-	 */
-	public function generatePattern($domainArray) {
-		if (empty($domainArray)) {
-			$domain = new Tx_HostsPattern_Domain_Model_Domain();
-			$domain->setDomainName(t3lib_div::getIndpEnv('HTTP_HOST'));
-			$domainArray = array($domain);
-		}
+    /**
+     * @param Domain[] $domainArray
+     * @return string
+     */
+    public function generatePattern($domainArray)
+    {
+        if (empty($domainArray)) {
+            $domain = new Domain();
+            $domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
+            $domainArray = array($domain);
+        }
 
-		$patternArray = array();
-		$extractedDomainsArray = $this->extractDomains($domainArray);
-		foreach ($extractedDomainsArray as $domainName => $subdomainArray) {
-			$patternArray[] = $this->getPatternForDomain($domainName, $subdomainArray);
-		}
-		unset($domain);
+        $patternArray = array();
+        $extractedDomainsArray = $this->extractDomains($domainArray);
+        foreach ($extractedDomainsArray as $domainName => $subdomainArray) {
+            $patternArray[] = $this->getPatternForDomain($domainName, $subdomainArray);
+        }
+        unset($domain);
 
-		return count($patternArray) > 1 ? '(' . implode('|', $patternArray) . ')' : $patternArray[0];
-	}
+        return count($patternArray) > 1 ? '(' . implode('|', $patternArray) . ')' : $patternArray[0];
+    }
 
-	/**
-	 * @param Tx_HostsPattern_Domain_Model_Domain[] $domainArray
-	 * @return array
-	 */
-	protected function extractDomains($domainArray) {
-		$extractedDomainArray = array();
+    /**
+     * @param Domain[] $domainArray
+     * @return array
+     */
+    protected function extractDomains($domainArray)
+    {
+        $extractedDomainArray = array();
 
-		/** @var Tx_HostsPattern_Domain_Model_Domain $domain */
-		foreach ($domainArray as $domain) {
-			$reverseHost = array_reverse(explode('.', $domain->getDomainName()));
-			$domainName = preg_quote($reverseHost[1] . '.' . $reverseHost[0]);
-			unset($reverseHost[0], $reverseHost[1]);
-			$subdomain = '';
-			if (!empty($reverseHost)) {
-				$subdomain = implode('.', array_reverse($reverseHost));
-			}
-			if (!is_array($extractedDomainArray[$domainName])) {
-				$extractedDomainArray[$domainName] = array();
-			}
-			$extractedDomainArray[$domainName][] = preg_quote($subdomain);
-		}
-		unset($domain);
+        /** @var Domain $domain */
+        foreach ($domainArray as $domain) {
+            $reverseHost = array_reverse(explode('.', $domain->getDomainName()));
+            $domainName = preg_quote($reverseHost[1] . '.' . $reverseHost[0]);
+            unset($reverseHost[0], $reverseHost[1]);
+            $subdomain = '';
+            if (!empty($reverseHost)) {
+                $subdomain = implode('.', array_reverse($reverseHost));
+            }
+            if (!is_array($extractedDomainArray[$domainName])) {
+                $extractedDomainArray[$domainName] = array();
+            }
+            $extractedDomainArray[$domainName][] = preg_quote($subdomain);
+        }
+        unset($domain);
 
-		return $extractedDomainArray;
-	}
+        return $extractedDomainArray;
+    }
 
-	/**
-	 * @param string $domainName
-	 * @param array $subdomainArray
-	 * @return string
-	 */
-	protected function getPatternForDomain($domainName, $subdomainArray) {
-		$hasDomainWithoutSubdomain = FALSE;
-		if (in_array('', $subdomainArray)) {
-			$hasDomainWithoutSubdomain = TRUE;
-			$subdomainArray = array_filter($subdomainArray, 'strlen');
-		}
-		$hasMultipleSubdomains = count($subdomainArray) > 1 ? TRUE : FALSE;
-		$pattern = ($hasMultipleSubdomains ? '(' : '') . implode('|', $subdomainArray) . ($hasMultipleSubdomains ? ')' : '');
-		if (!empty($subdomainArray)) {
-			$pattern .= '\\.';
-		}
-		if ($hasDomainWithoutSubdomain && !empty($subdomainArray)) {
-			$pattern = '(' . $pattern . ')?';
-		}
-		$pattern .= $domainName;
+    /**
+     * @param string $domainName
+     * @param array $subdomainArray
+     * @return string
+     */
+    protected function getPatternForDomain($domainName, $subdomainArray)
+    {
+        $hasDomainWithoutSubdomain = false;
+        if (in_array('', $subdomainArray)) {
+            $hasDomainWithoutSubdomain = true;
+            $subdomainArray = array_filter($subdomainArray, 'strlen');
+        }
+        $hasMultipleSubdomains = count($subdomainArray) > 1 ? true : false;
+        $pattern = ($hasMultipleSubdomains ? '(' : '') . implode('|',
+                $subdomainArray) . ($hasMultipleSubdomains ? ')' : '');
+        if (!empty($subdomainArray)) {
+            $pattern .= '\\.';
+        }
+        if ($hasDomainWithoutSubdomain && !empty($subdomainArray)) {
+            $pattern = '(' . $pattern . ')?';
+        }
+        $pattern .= $domainName;
 
-		return $pattern;
-	}
+        return $pattern;
+    }
 
 }

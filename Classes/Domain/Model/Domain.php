@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,29 +25,34 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Domain model
  */
-class Tx_HostsPattern_Domain_Model_Domain extends Tx_Extbase_DomainObject_AbstractEntity {
+class Domain extends AbstractEntity
+{
 
-	/**
-	 * @var string
-	 */
-	protected $domainName;
+    /**
+     * @var string
+     */
+    protected $domainName;
 
-	/**
-	 * @return string
-	 */
-	public function getDomainName() {
-		return $this->domainName;
-	}
+    /**
+     * @return string
+     */
+    public function getDomainName()
+    {
+        return $this->domainName;
+    }
 
-	/**
-	 * @param string $domainName
-	 * @return void
-	 */
-	public function setDomainName($domainName) {
-		$this->domainName = $domainName;
-	}
+    /**
+     * @param string $domainName
+     * @return void
+     */
+    public function setDomainName($domainName)
+    {
+        $this->domainName = $domainName;
+    }
 
 }

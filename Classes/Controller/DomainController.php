@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,78 +25,80 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Repository\DomainRepository;
+use IchHabRecht\HostsPattern\Service\PatternService;
+use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\Configuration\ConfigurationManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
  * Controller for backend module
  */
-class Tx_HostsPattern_Controller_DomainController extends Tx_Extbase_MVC_Controller_ActionController {
+class DomainController extends ActionController
+{
 
-	/**
-	 * @var Tx_HostsPattern_Domain_Repository_DomainRepository
-	 */
-	protected $domainRepository;
+    /**
+     * @var DomainRepository;
+     */
+    protected $domainRepository;
 
-	/**
-	 * @var Tx_HostsPattern_Service_PatternService
-	 */
-	protected $patternService;
+    /**
+     * @var PatternService
+     */
+    protected $patternService;
 
-	/**
-	 * @param Tx_HostsPattern_Domain_Repository_DomainRepository $domainRepository
-	 * @return void
-	 */
-	public function injectDomainRepository(Tx_HostsPattern_Domain_Repository_DomainRepository $domainRepository) {
-		$this->domainRepository = $domainRepository;
-	}
+    /**
+     * View object name
+     *
+     * @var string
+     */
+    protected $defaultViewObjectName = BackendTemplateView::class;
 
-	/**
-	 * @param Tx_HostsPattern_Service_PatternService $patternService
-	 * @return void
-	 */
-	public function injectPatternService(Tx_HostsPattern_Service_PatternService $patternService) {
-		$this->patternService = $patternService;
-	}
+    /**
+     * @param DomainRepository $domainRepository
+     */
+    public function injectDomainRepository(DomainRepository $domainRepository)
+    {
+        $this->domainRepository = $domainRepository;
+    }
 
-	/**
-	 * @return void
-	 */
-	public function indexAction() {
-		$domains = $this->domainRepository->findAll();
-		if (!count($domains)) {
-			$domain = $this->objectManager->get('Tx_HostsPattern_Domain_Model_Domain');
-			$domain->setDomainName(t3lib_div::getIndpEnv('HTTP_HOST'));
-			$domains = array($domain);
-		}
-		$pattern = $this->patternService->generatePattern($domains);
+    /**
+     * @param PatternService $patternService
+     * @return void
+     */
+    public function injectPatternService(PatternService $patternService)
+    {
+        $this->patternService = $patternService;
+    }
 
-		if ($this->request->hasArgument('write')) {
-			if (version_compare(TYPO3_branch, '6.2', '<')) {
-				/** @var t3lib_install $instObj */
-				$instObj = t3lib_div::makeInstance('t3lib_install');
-				$instObj->allowUpdateLocalConf = 1;
+    /**
+     * @return void
+     */
+    public function indexAction()
+    {
+        $domains = $this->domainRepository->findAll();
+        if (!count($domains)) {
+            $domain = $this->objectManager->get(Domain::class);
+            $domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
+            $domains = array($domain);
+        }
+        $pattern = $this->patternService->generatePattern($domains);
 
-				// Get lines from localconf file
-				$lines = $instObj->writeToLocalconf_control();
-				$instObj->setValueInLocalconfFile($lines, '$TYPO3_CONF_VARS[\'SYS\'][\'trustedHostsPattern\']', $pattern);
-				$instObj->writeToLocalconf_control($lines);
-				$this->flashMessageContainer->add(
-					htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
-					'Trusted Hosts Pattern was changed'
-				);
-			} else {
-				/** @var \TYPO3\CMS\Core\Configuration\ConfigurationManager $configurationManager */
-				$configurationManager = $this->objectManager->get('TYPO3\\CMS\\Core\\Configuration\\ConfigurationManager');
-				$configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
-				$this->addFlashMessage(
-					htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
-					'Trusted Hosts Pattern was changed'
-				);
-			}
-		}
+        if ($this->request->hasArgument('write')) {
+            /** @var ConfigurationManager $configurationManager */
+            $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+            $configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
+            $this->addFlashMessage(
+                htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
+                'Trusted Hosts Pattern was changed'
+            );
+        }
 
-		$this->view->assignMultiple(array(
-			'domains' => $domains,
-			'pattern' => $pattern,
-		));
-	}
+        $this->view->assignMultiple(array(
+            'domains' => $domains,
+            'pattern' => $pattern,
+        ));
+    }
 
 }

@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\Domain\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,19 +25,24 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * Repository for domain records
  */
-class Tx_HostsPattern_Domain_Repository_DomainRepository extends Tx_Extbase_Persistence_Repository {
+class DomainRepository extends Repository
+{
 
-	/**
-	 * @return void
-	 */
-	public function initializeObject() {
-		/** @var Tx_Extbase_Persistence_QuerySettingsInterface $defaultQuerySettings */
-		$defaultQuerySettings = $this->objectManager->get('Tx_Extbase_Persistence_QuerySettingsInterface');
-		$defaultQuerySettings->setRespectStoragePage(FALSE);
-		$this->setDefaultQuerySettings($defaultQuerySettings);
-	}
+    /**
+     * @return void
+     */
+    public function initializeObject()
+    {
+        /** @var QuerySettingsInterface $defaultQuerySettings */
+        $defaultQuerySettings = $this->objectManager->get(QuerySettingsInterface::class);
+        $defaultQuerySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($defaultQuerySettings);
+    }
 
 }
