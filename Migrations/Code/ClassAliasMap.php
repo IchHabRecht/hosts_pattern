@@ -24,5 +24,5 @@
  ***************************************************************/
 
 return array(
-	'Tx_Extbase_Persistence_QuerySettings' => 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings',
+    'Tx_Extbase_Persistence_QuerySettings' => 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings',
 );

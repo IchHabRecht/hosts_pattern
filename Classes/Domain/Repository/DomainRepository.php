@@ -31,16 +31,18 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * Repository for domain records
  */
-class DomainRepository extends Repository {
+class DomainRepository extends Repository
+{
 
-	/**
-	 * @return void
-	 */
-	public function initializeObject() {
-		/** @var QuerySettingsInterface $defaultQuerySettings */
-		$defaultQuerySettings = $this->objectManager->get(QuerySettingsInterface::class);
-		$defaultQuerySettings->setRespectStoragePage(FALSE);
-		$this->setDefaultQuerySettings($defaultQuerySettings);
-	}
+    /**
+     * @return void
+     */
+    public function initializeObject()
+    {
+        /** @var QuerySettingsInterface $defaultQuerySettings */
+        $defaultQuerySettings = $this->objectManager->get(QuerySettingsInterface::class);
+        $defaultQuerySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($defaultQuerySettings);
+    }
 
 }

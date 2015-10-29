@@ -30,26 +30,29 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * Domain model
  */
-class Domain extends AbstractEntity {
+class Domain extends AbstractEntity
+{
 
-	/**
-	 * @var string
-	 */
-	protected $domainName;
+    /**
+     * @var string
+     */
+    protected $domainName;
 
-	/**
-	 * @return string
-	 */
-	public function getDomainName() {
-		return $this->domainName;
-	}
+    /**
+     * @return string
+     */
+    public function getDomainName()
+    {
+        return $this->domainName;
+    }
 
-	/**
-	 * @param string $domainName
-	 * @return void
-	 */
-	public function setDomainName($domainName) {
-		$this->domainName = $domainName;
-	}
+    /**
+     * @param string $domainName
+     * @return void
+     */
+    public function setDomainName($domainName)
+    {
+        $this->domainName = $domainName;
+    }
 
 }
