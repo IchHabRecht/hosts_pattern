@@ -23,6 +23,8 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Controller for backend module
  */
@@ -61,7 +63,7 @@ class Tx_HostsPattern_Controller_DomainController extends Tx_Extbase_MVC_Control
 		$domains = $this->domainRepository->findAll();
 		if (!count($domains)) {
 			$domain = $this->objectManager->get('Tx_HostsPattern_Domain_Model_Domain');
-			$domain->setDomainName(t3lib_div::getIndpEnv('HTTP_HOST'));
+			$domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
 			$domains = array($domain);
 		}
 		$pattern = $this->patternService->generatePattern($domains);
