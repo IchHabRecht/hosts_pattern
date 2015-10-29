@@ -23,10 +23,12 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * Repository for domain records
  */
-class Tx_HostsPattern_Domain_Repository_DomainRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_HostsPattern_Domain_Repository_DomainRepository extends Repository {
 
 	/**
 	 * @return void
