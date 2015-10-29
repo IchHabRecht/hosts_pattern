@@ -48,6 +48,13 @@ class DomainController extends ActionController {
 	protected $patternService;
 
 	/**
+	 * View object name
+	 *
+	 * @var string
+	 */
+	protected $defaultViewObjectName = BackendTemplateView::class;
+
+	/**
 	 * @param DomainRepository $domainRepository
 	 */
 	public function injectDomainRepository(DomainRepository $domainRepository) {
