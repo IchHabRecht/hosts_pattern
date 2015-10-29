@@ -67,28 +67,13 @@ class Tx_HostsPattern_Controller_DomainController extends Tx_Extbase_MVC_Control
 		$pattern = $this->patternService->generatePattern($domains);
 
 		if ($this->request->hasArgument('write')) {
-			if (version_compare(TYPO3_branch, '6.2', '<')) {
-				/** @var t3lib_install $instObj */
-				$instObj = t3lib_div::makeInstance('t3lib_install');
-				$instObj->allowUpdateLocalConf = 1;
-
-				// Get lines from localconf file
-				$lines = $instObj->writeToLocalconf_control();
-				$instObj->setValueInLocalconfFile($lines, '$TYPO3_CONF_VARS[\'SYS\'][\'trustedHostsPattern\']', $pattern);
-				$instObj->writeToLocalconf_control($lines);
-				$this->flashMessageContainer->add(
-					htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
-					'Trusted Hosts Pattern was changed'
-				);
-			} else {
-				/** @var \TYPO3\CMS\Core\Configuration\ConfigurationManager $configurationManager */
-				$configurationManager = $this->objectManager->get('TYPO3\\CMS\\Core\\Configuration\\ConfigurationManager');
-				$configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
-				$this->addFlashMessage(
-					htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
-					'Trusted Hosts Pattern was changed'
-				);
-			}
+			/** @var \TYPO3\CMS\Core\Configuration\ConfigurationManager $configurationManager */
+			$configurationManager = $this->objectManager->get('TYPO3\\CMS\\Core\\Configuration\\ConfigurationManager');
+			$configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
+			$this->addFlashMessage(
+				htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
+				'Trusted Hosts Pattern was changed'
+			);
 		}
 
 		$this->view->assignMultiple(array(
