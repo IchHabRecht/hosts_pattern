@@ -1,3 +1,18 @@
+2015-10-29         [RELEASE] Release of hosts_pattern 2.0.0 (Nicole Cordes)
+2015-10-29 b2b4a74 [TASK] Reformat code according to TYPO3 Coding Guidelines (Nicole Cordes)
+2015-10-29 e8ce704 [BUGFIX] Use new module api (Nicole Cordes)
+2015-10-29 97a8527 [BUGFIX] Adjust iconViewHelper to new icon api (Nicole Cordes)
+2015-10-29 2aa538a [TASK] Add namespaces to extension (Nicole Cordes)
+2015-10-29 9edf533 [TASK] Set dependency to TYPO3 7.5 (Nicole Cordes)
+2015-10-29 b0f380f [TASK] Replace deprecated class Tx_Extbase_Persistence_QuerySettingsInterface (Nicole Cordes)
+2015-10-29 4538194 [TASK] Replace deprecated class Tx_Extbase_Persistence_Repository (Nicole Cordes)
+2015-10-29 2907d22 [TASK] Replace deprecated class Tx_Extbase_DomainObject_AbstractEntity (Nicole Cordes)
+2015-10-29 e8ca767 [TASK] Replace deprecated class Tx_Extbase_MVC_Controller_ActionController (Nicole Cordes)
+2015-10-29 3e2b263 [TASK] Replace deprecated class t3lib_div (Nicole Cordes)
+2015-10-29 c3914e8 [TASK] Remove legacy code for minor TYPO3 versions (Nicole Cordes)
+2015-10-29 83cfee1 [TASK] Replace deprecated class t3lib_extMgm (Nicole Cordes)
+2015-10-29 4c8319c [TASK] Replace deprecated class Tx_Extbase_Utility_Extension (Nicole Cordes)
+
 2015-10-29         [RELEASE] Release of hosts_pattern 1.3.0 (Nicole Cordes)
 2015-02-18 cee4061 [BUGFIX] Use old flashMessageContainer for TYPO3 6.1 (Nicole Cordes)
 
