@@ -1,3 +1,6 @@
+2015-10-29         [RELEASE] Release of hosts_pattern 1.3.0 (Nicole Cordes)
+2015-02-18 cee4061 [BUGFIX] Use old flashMessageContainer for TYPO3 6.1 (Nicole Cordes)
+
 2014-09-16         [RELEASE] Release of hosts_pattern 1.2.2 (Nicole Cordes)
 2014-09-16 180e1a9 [HOTFIX] Reverse array before implode to reorder subdomains (Nicole Cordes)
 
