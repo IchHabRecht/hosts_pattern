@@ -19,7 +19,7 @@ if (TYPO3_MODE === 'BE') {
 		)
 	);
 
-	t3lib_extMgm::addTypoScript(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
 		'hosts_pattern',
 		'setup',
 		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:hosts_pattern/Configuration/TypoScript/setup.txt">'
