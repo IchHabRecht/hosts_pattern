@@ -1,4 +1,6 @@
 <?php
+namespace IchHabRecht\HostsPattern\ViewHelpers\Be\Buttons;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,25 +25,71 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Type\Icon\IconState;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+
 /**
  * Class Tx_HostsPattern_ViewHelpers_Be_Buttons_IconViewHelper to render sprite icons
  */
-class Tx_HostsPattern_ViewHelpers_Be_Buttons_IconViewHelper extends Tx_Fluid_ViewHelpers_Be_Buttons_IconViewHelper {
+class IconViewHelper extends AbstractViewHelper implements CompilableInterface {
 
 	/**
 	 * Renders an sprite icon
 	 *
 	 * @param string $uri
-	 * @param string $icon
+	 * @param string $identifier
 	 * @param string $title
+	 * @param string $size
+	 * @param string $overlay
+	 * @param string $state
 	 * @return string
 	 */
-	public function render($uri = '', $icon = 'closedok', $title = '') {
-		$icon = t3lib_iconWorks::getSpriteIcon($icon, array('title' => $title));
+	public function render($uri = '', $identifier = 'closedok', $title = '', $size = Icon::SIZE_SMALL, $overlay = null, $state = IconState::STATE_DEFAULT) {
+		return static::renderStatic(
+			array(
+				'uri' => $uri,
+				'identifier' => $identifier,
+				'title' => $title,
+				'size' => $size,
+				'overlay' => $overlay,
+				'state' => $state,
+			),
+			$this->buildRenderChildrenClosure(),
+			$this->renderingContext
+		);
+	}
+
+	/**
+	 * @param array $arguments
+	 * @param \Closure $renderChildrenClosure
+	 * @param RenderingContextInterface $renderingContext
+	 * @return string
+	 */
+	static public function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
+		$identifier = $arguments['identifier'];
+		$size = $arguments['size'];
+		$overlay = $arguments['overlay'];
+		$state = IconState::cast($arguments['state']);
+
+		/** @var IconFactory $iconFactory */
+		$iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+		$icon = $iconFactory->getIcon($identifier, $size, $overlay, $state)->render();
+
+		$title = $arguments['title'];
+		if (!empty($title)) {
+			$icon = '<span title="' . htmlspecialchars($title) . '">' . $icon . '</span>';
+		}
+
+		$uri = $arguments['uri'];
 		if (empty($uri)) {
 			return $icon;
 		} else {
-			return '<a href="' . $uri . '">' . $icon . '</a>';
+			return '<a href="' . htmlspecialchars($uri) . '">' . $icon . '</a>';
 		}
 	}
 }
