@@ -24,11 +24,12 @@
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Controller for backend module
  */
-class Tx_HostsPattern_Controller_DomainController extends Tx_Extbase_MVC_Controller_ActionController {
+class DomainController extends ActionController {
 
 	/**
 	 * @var Tx_HostsPattern_Domain_Repository_DomainRepository
