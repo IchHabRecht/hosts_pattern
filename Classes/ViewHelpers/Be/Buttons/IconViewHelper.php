@@ -38,35 +38,33 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
  */
 class IconViewHelper extends AbstractViewHelper implements CompilableInterface
 {
+    /**
+     * View helper returns HTML, thus we need to disable output escaping
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('uri', 'string', '', false, '');
+        $this->registerArgument('identifier', 'string', '', false, 'closedok');
+        $this->registerArgument('title', 'string', '', false, '');
+        $this->registerArgument('size', 'string', '', false, Icon::SIZE_SMALL);
+        $this->registerArgument('overlay', 'string', '');
+        $this->registerArgument('state', 'string', '', false, IconState::STATE_DEFAULT);
+    }
 
     /**
      * Renders an sprite icon
      *
-     * @param string $uri
-     * @param string $identifier
-     * @param string $title
-     * @param string $size
-     * @param string $overlay
-     * @param string $state
      * @return string
      */
-    public function render(
-        $uri = '',
-        $identifier = 'closedok',
-        $title = '',
-        $size = Icon::SIZE_SMALL,
-        $overlay = null,
-        $state = IconState::STATE_DEFAULT
-    ) {
+    public function render()
+    {
         return static::renderStatic(
-            array(
-                'uri' => $uri,
-                'identifier' => $identifier,
-                'title' => $title,
-                'size' => $size,
-                'overlay' => $overlay,
-                'state' => $state,
-            ),
+            $this->arguments,
             $this->buildRenderChildrenClosure(),
             $this->renderingContext
         );
@@ -78,11 +76,8 @@ class IconViewHelper extends AbstractViewHelper implements CompilableInterface
      * @param RenderingContextInterface $renderingContext
      * @return string
      */
-    static public function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    {
         $identifier = $arguments['identifier'];
         $size = $arguments['size'];
         $overlay = $arguments['overlay'];
