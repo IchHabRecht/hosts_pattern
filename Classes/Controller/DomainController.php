@@ -25,6 +25,7 @@ namespace IchHabRecht\HostsPattern\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use IchHabRecht\HostsPattern\Domain\Model\Domain;
 use IchHabRecht\HostsPattern\Domain\Repository\DomainRepository;
 use IchHabRecht\HostsPattern\Service\PatternService;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
