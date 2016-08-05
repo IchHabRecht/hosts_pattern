@@ -1,0 +1,50 @@
+{
+  "name": "ichhabrecht/hosts-pattern",
+  "type": "typo3-cms-extension",
+  "description": "Generate trustedHostsPattern configuration from existing domain records",
+  "keywords": [
+    "TYPO3",
+    "trustedHostsPattern",
+    "domain"
+  ],
+  "homepage": "https://github.com/IchHabRecht/TYPO3-hosts_pattern",
+  "authors": [
+    {
+      "name": "Nicole Cordes",
+      "email": "typo3@cordes.co",
+      "role": "Developer"
+    }
+  ],
+  "license": "GPL-2.0+",
+  "require": {
+    "typo3/cms": ">=7.5.0,<8.3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "IchHabRecht\\HostsPattern\\": "Classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "IchHabRecht\\HostsPattern\\Tests\\": "Tests/",
+      "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+    }
+  },
+  "replace": {
+    "hosts_pattern": "self.version",
+    "typo3-ter/hosts-pattern": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin"
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web"
+    }
+  }
+}
