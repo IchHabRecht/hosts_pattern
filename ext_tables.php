@@ -14,7 +14,7 @@ if (TYPO3_MODE === 'BE') {
         ),
         array(
             'access' => 'admin',
-            'icon' => 'EXT:hosts_pattern/ext_icon.gif',
+            'icon' => 'EXT:hosts_pattern/Resources/Public/Icons/module-hostspattern.svg',
             'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xml',
         )
     );
