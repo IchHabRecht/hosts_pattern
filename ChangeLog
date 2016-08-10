@@ -1,3 +1,13 @@
+2016-08-10         [RELEASE] Release of hosts_pattern 2.1.0 (Nicole Cordes)
+2016-08-10 3cd9196 [TASK] Adjust author email address (Nicole Cordes)
+2016-08-10 0ea43f9 [TASK] Raise TYPO3 version to 8.2.99 (Nicole Cordes)
+2016-08-05 e216686 [TASK] Add travis.yml (Nicole Cordes)
+2016-08-05 be8f4e1 [TASK] Ignore .Build folder (Nicole Cordes)
+2016-08-05 0178c6d [TASK] Add composer.json (Nicole Cordes)
+2016-08-05 aceb1e8 [BUGFIX] Prevent ouput escaping in IconViewHelper (Nicole Cordes)
+2016-08-05 926de52 [BUGFIX] Add missing use statement for Domain model (Nicole Cordes)
+2016-08-05 b014330 [TASK] Add new extension icon (Nicole Cordes)
+
 2015-10-29         [RELEASE] Release of hosts_pattern 2.0.0 (Nicole Cordes)
 2015-10-29 b2b4a74 [TASK] Reformat code according to TYPO3 Coding Guidelines (Nicole Cordes)
 2015-10-29 e8ce704 [BUGFIX] Use new module api (Nicole Cordes)
