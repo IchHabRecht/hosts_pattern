@@ -1,3 +1,6 @@
+2016-11-08         [RELEASE] Release of hosts_pattern 2.1.1 (Nicole Cordes)
+2016-11-08 42a891b [TASK] Raise version compatibility to TYPO3 8.4.99 (Nicole Cordes)
+
 2016-08-10         [RELEASE] Release of hosts_pattern 2.1.0 (Nicole Cordes)
 2016-08-10 3cd9196 [TASK] Adjust author email address (Nicole Cordes)
 2016-08-10 0ea43f9 [TASK] Raise TYPO3 version to 8.2.99 (Nicole Cordes)
