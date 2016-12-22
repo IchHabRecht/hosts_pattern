@@ -1,3 +1,7 @@
+2016-12-22         [RELEASE] Release of hosts_pattern 2.1.2 (Nicole Cordes)
+2016-12-22 f9cdb57 [TASK] Raise compatibility to TYPO3 8.5 (Nicole Cordes)
+2016-11-08 b6c44cd [TASK] Add more matrix versions to .travis.yml (Nicole Cordes)
+
 2016-11-08         [RELEASE] Release of hosts_pattern 2.1.1 (Nicole Cordes)
 2016-11-08 42a891b [TASK] Raise version compatibility to TYPO3 8.4.99 (Nicole Cordes)
 
