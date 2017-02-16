@@ -26,12 +26,12 @@ namespace IchHabRecht\HostsPattern\Tests\Unit;
 
 use IchHabRecht\HostsPattern\Domain\Model\Domain;
 use IchHabRecht\HostsPattern\Service\PatternService;
-use TYPO3\CMS\Core\Tests\BaseTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for IchHabRecht\HostsPattern\Service\PatternService
  */
-class PatternServiceTest extends BaseTestCase
+class PatternServiceTest extends UnitTestCase
 {
 
     /**
