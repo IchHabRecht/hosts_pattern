@@ -1,3 +1,9 @@
+2017-02-20         [RELEASE] Release of hosts_pattern 2.1.3 (Nicole Cordes)
+2017-02-20 8e14c28 [TASK] Raise compatibility to TYPO3 8.6 (Nicole Cordes)
+2017-02-20 1a13bdb [TASK] Raise nimut/testing-framework to ^0.2 (Nicole Cordes)
+2017-02-16 c8ce0df [TASK] Use test class from nimut/testing-framework (Nicole Cordes)
+2017-02-16 2474e65 [TASK] Use nimut/testing-framework for unit tests (Nicole Cordes)
+
 2016-12-22         [RELEASE] Release of hosts_pattern 2.1.2 (Nicole Cordes)
 2016-12-22 f9cdb57 [TASK] Raise compatibility to TYPO3 8.5 (Nicole Cordes)
 2016-11-08 b6c44cd [TASK] Add more matrix versions to .travis.yml (Nicole Cordes)
