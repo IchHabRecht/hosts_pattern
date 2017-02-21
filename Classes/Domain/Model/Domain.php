@@ -32,7 +32,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Domain extends AbstractEntity
 {
-
     /**
      * @var string
      */
@@ -54,5 +53,4 @@ class Domain extends AbstractEntity
     {
         $this->domainName = $domainName;
     }
-
 }

@@ -23,6 +23,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-return array(
+return [
     'Tx_Extbase_Persistence_QuerySettings' => 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings',
-);
+];
