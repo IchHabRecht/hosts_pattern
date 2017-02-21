@@ -38,7 +38,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class DomainController extends ActionController
 {
-
     /**
      * @var DomainRepository;
      */
@@ -82,7 +81,7 @@ class DomainController extends ActionController
         if (!count($domains)) {
             $domain = $this->objectManager->get(Domain::class);
             $domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
-            $domains = array($domain);
+            $domains = [$domain];
         }
         $pattern = $this->patternService->generatePattern($domains);
 
@@ -96,10 +95,9 @@ class DomainController extends ActionController
             );
         }
 
-        $this->view->assignMultiple(array(
+        $this->view->assignMultiple([
             'domains' => $domains,
             'pattern' => $pattern,
-        ));
+        ]);
     }
-
 }

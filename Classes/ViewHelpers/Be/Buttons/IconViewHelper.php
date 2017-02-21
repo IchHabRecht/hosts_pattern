@@ -95,8 +95,7 @@ class IconViewHelper extends AbstractViewHelper implements CompilableInterface
         $uri = $arguments['uri'];
         if (empty($uri)) {
             return $icon;
-        } else {
-            return '<a href="' . htmlspecialchars($uri) . '">' . $icon . '</a>';
         }
+        return '<a href="' . htmlspecialchars($uri) . '">' . $icon . '</a>';
     }
 }

@@ -9,14 +9,14 @@ if (TYPO3_MODE === 'BE') {
         'tools',
         'HostsPattern',
         '',
-        array(
+        [
             'Domain' => 'index',
-        ),
-        array(
+        ],
+        [
             'access' => 'admin',
             'icon' => 'EXT:hosts_pattern/Resources/Public/Icons/module-hostspattern.svg',
             'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xml',
-        )
+        ]
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(

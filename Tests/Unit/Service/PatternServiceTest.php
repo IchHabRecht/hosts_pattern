@@ -33,7 +33,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class PatternServiceTest extends UnitTestCase
 {
-
     /**
      * @var PatternService
      */
@@ -53,7 +52,7 @@ class PatternServiceTest extends UnitTestCase
      */
     protected function getDomainObjectsFromArray(array $domainArray)
     {
-        $domainStorageArray = array();
+        $domainStorageArray = [];
         foreach ($domainArray as $domain) {
             $domainObject = new Domain();
             $domainObject->setDomainName($domain);
@@ -69,59 +68,59 @@ class PatternServiceTest extends UnitTestCase
      */
     public function generatePatternDataProvider()
     {
-        return array(
-            'Simple domain' => array(
-                array(
+        return [
+            'Simple domain' => [
+                [
                     'example.com',
-                ),
+                ],
                 'example\\.com',
-            ),
-            'Same domain with different subdomains' => array(
-                array(
+            ],
+            'Same domain with different subdomains' => [
+                [
                     'www.example.com',
                     'wwwt.example.com',
-                ),
+                ],
                 '(www|wwwt)\\.example\\.com',
-            ),
-            'Same domain without subdomain' => array(
-                array(
+            ],
+            'Same domain without subdomain' => [
+                [
                     'example.com',
                     'www.example.com',
-                ),
+                ],
                 '(www\\.)?example\\.com',
-            ),
-            'Same domain with multiple subdomains' => array(
-                array(
+            ],
+            'Same domain with multiple subdomains' => [
+                [
                     'www.example.com',
                     'www.secure.example.com',
-                ),
+                ],
                 '(www|www\\.secure)\\.example\\.com',
-            ),
-            'Two different domains' => array(
-                array(
+            ],
+            'Two different domains' => [
+                [
                     'www.example.com',
                     'www.domain.com',
-                ),
+                ],
                 '(www\\.example\\.com|www\\.domain\\.com)',
-            ),
-            'Two equal domains with extra domain' => array(
-                array(
+            ],
+            'Two equal domains with extra domain' => [
+                [
                     'www.example.com',
                     'subdomain.example.com',
                     'www.domain.com',
-                ),
+                ],
                 '((www|subdomain)\\.example\\.com|www\\.domain\\.com)',
-            ),
-            'Three equal domains without subdomain with extra domain' => array(
-                array(
+            ],
+            'Three equal domains without subdomain with extra domain' => [
+                [
                     'www.example.com',
                     'subdomain.example.com',
                     'example.com',
                     'www.domain.com',
-                ),
+                ],
                 '(((www|subdomain)\\.)?example\\.com|www\\.domain\\.com)',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -144,7 +143,6 @@ class PatternServiceTest extends UnitTestCase
     {
         $_SERVER['HTTP_HOST'] = 'www.foo.bar';
 
-        $this->assertSame('www\\.foo\\.bar', $this->fixture->generatePattern(array()));
+        $this->assertSame('www\\.foo\\.bar', $this->fixture->generatePattern([]));
     }
-
 }

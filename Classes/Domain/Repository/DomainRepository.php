@@ -33,7 +33,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class DomainRepository extends Repository
 {
-
     /**
      * @return void
      */
@@ -44,5 +43,4 @@ class DomainRepository extends Repository
         $defaultQuerySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($defaultQuerySettings);
     }
-
 }

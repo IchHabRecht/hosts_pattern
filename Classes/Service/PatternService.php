@@ -33,7 +33,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PatternService
 {
-
     /**
      * @param Domain[] $domainArray
      * @return string
@@ -43,10 +42,10 @@ class PatternService
         if (empty($domainArray)) {
             $domain = new Domain();
             $domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
-            $domainArray = array($domain);
+            $domainArray = [$domain];
         }
 
-        $patternArray = array();
+        $patternArray = [];
         $extractedDomainsArray = $this->extractDomains($domainArray);
         foreach ($extractedDomainsArray as $domainName => $subdomainArray) {
             $patternArray[] = $this->getPatternForDomain($domainName, $subdomainArray);
@@ -62,7 +61,7 @@ class PatternService
      */
     protected function extractDomains($domainArray)
     {
-        $extractedDomainArray = array();
+        $extractedDomainArray = [];
 
         /** @var Domain $domain */
         foreach ($domainArray as $domain) {
@@ -74,7 +73,7 @@ class PatternService
                 $subdomain = implode('.', array_reverse($reverseHost));
             }
             if (!is_array($extractedDomainArray[$domainName])) {
-                $extractedDomainArray[$domainName] = array();
+                $extractedDomainArray[$domainName] = [];
             }
             $extractedDomainArray[$domainName][] = preg_quote($subdomain);
         }
@@ -108,5 +107,4 @@ class PatternService
 
         return $pattern;
     }
-
 }
