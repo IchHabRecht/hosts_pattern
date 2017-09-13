@@ -1,17 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
-	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
-	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
-]>
-<svg  version="1.1" id="Ebene_1" xmlns="&ns_svg;"  width="128" height="128" viewBox="0 0 128 128" overflow="visible" enable-background="new 0 0 128 128" xml:space="preserve">
-<rect fill="#43A4FF" width="128" height="128"/>
-<rect x="14" y="87.1" fill="#FFFFFF" width="100" height="7"/>
-<rect x="53.5" y="83.1" fill="#FFFFFF" width="21" height="15"/>
-<rect x="60.5" y="69.1" fill="#FFFFFF" width="7" height="15"/>
-<rect x="24.2" y="29.9" fill="#FFFFFF" width="40" height="40"/>
-<rect x="31.2" y="36.9" fill="#43A4FF" width="26" height="26"/>
-<circle fill="#FFFFFF" cx="39.2" cy="53.4" r="5"/>
-<rect x="63.8" y="29.9" fill="#FFFFFF" width="40" height="40"/>
-<rect x="70.8" y="36.9" fill="#43A4FF" width="26" height="26"/>
-<circle fill="#FFFFFF" cx="78.8" cy="53.4" r="5"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149.96 149.96"><defs><style>.cls-1{fill:#43a4ff;}.cls-2{fill:#fff;}</style></defs><title>host-pattern</title><g id="Ebene_2" data-name="Ebene 2"><g id="Ebene_1-2" data-name="Ebene 1"><rect class="cls-1" width="149.96" height="149.96"/><rect class="cls-2" x="16.4" y="102.04" width="117.15" height="8.2"/><rect class="cls-2" x="62.68" y="97.36" width="24.6" height="17.57"/><rect class="cls-2" x="70.88" y="80.95" width="8.2" height="17.57"/><rect class="cls-2" x="28.35" y="35.03" width="46.86" height="46.86"/><rect class="cls-1" x="36.55" y="43.23" width="30.46" height="30.46"/><circle class="cls-2" cx="45.92" cy="62.56" r="5.86"/><rect class="cls-2" x="74.74" y="35.03" width="46.86" height="46.86"/><rect class="cls-1" x="82.95" y="43.23" width="30.46" height="30.46"/><circle class="cls-2" cx="92.32" cy="62.56" r="5.86"/></g></g></svg>
