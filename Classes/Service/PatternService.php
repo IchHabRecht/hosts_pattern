@@ -94,7 +94,7 @@ class PatternService
             $hasDomainWithoutSubdomain = true;
             $subdomainArray = array_filter($subdomainArray, 'strlen');
         }
-        $hasMultipleSubdomains = count($subdomainArray) > 1 ? true : false;
+        $hasMultipleSubdomains = count($subdomainArray) > 1;
         $pattern = ($hasMultipleSubdomains ? '(' : '') . implode('|',
                 $subdomainArray) . ($hasMultipleSubdomains ? ')' : '');
         if (!empty($subdomainArray)) {

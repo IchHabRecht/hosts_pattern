@@ -94,7 +94,7 @@ jobs:
           .Build/bin/phpunit-merger coverage .Log/coverage/ .Log/coverage.xml;
           .Build/bin/phpunit-merger log .Log/log/ .Log/log.xml;
 
-        - git fetch --unshallow || TRUE
+        - git fetch --unshallow || true
 
         - >
           echo;
