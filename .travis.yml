@@ -1,50 +1,132 @@
 language: php
 
-matrix:
-  include:
-    - php: 7.1
-      env: TYPO3="dev-master as 8.6.0"
-    - php: 7.1
-      env: TYPO3=^8.0
-    - php: 7.1
-      env: TYPO3=^7.6.0
-    - php: 7.0
-      env: TYPO3="dev-master as 8.6.0"
-    - php: 7.0
-      env: TYPO3=^8.0
-    - php: 7.0
-      env: TYPO3=^7.6.0
-    - php: 5.6
-      env: TYPO3=^7.6.0
-    - php: 5.5
-      env: TYPO3=^7.6.0
-
 addons:
   apt:
     packages:
       - parallel
+  sonarcloud:
+    organization: "ichhabrecht-github"
+    branches:
+      - master
+      - pre-merge
 
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.sonar/cache
 
-sudo: false
+jdk:
+  - oraclejdk8
+
+sudo: required
 
 before_install:
   - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
 
-before_script:
+install:
+  - if [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer remove --dev --no-update nimut/phpunit-merger; fi;
   - composer require typo3/cms="$TYPO3"
-  # Restore composer.json
-  - git checkout composer.json
-  - export TYPO3_PATH_WEB=$PWD/.Build/Web
+  - export TYPO3_PATH_ROOT=$PWD/.Build/Web
 
 script:
    - >
      echo;
      echo "Running unit tests";
-     .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+     echo;
+     echo;
+     .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/;
+
    - >
      echo;
      echo "Running php lint";
-     find . -name \*.php ! -path "./.Build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
+     echo;
+     echo;
+     find . -name \*.php ! -path "./.Build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;;
+
+jobs:
+  fast_finish: true
+  include:
+    - stage: test
+      php: 7.2
+      env: TYPO3=^8.0
+    - stage: test
+      php: 7.1
+      env: TYPO3=^8.0
+    - stage: test
+      php: 7.1
+      env: TYPO3=^7.6
+    - stage: test
+      php: 7.0
+      env: TYPO3=^8.0
+    - stage: test
+      php: 7.0
+      env: TYPO3=^7.6
+    - stage: test
+      php: 5.6
+      env: TYPO3=^7.6
+    - stage: test
+      php: 5.5
+      env: TYPO3=^7.6
+
+    - stage: publish to ter
+      if: tag IS present
+      php: 7.0
+      before_install: skip
+      install: skip
+      before_script: skip
+      script:
+        - >
+          if [ -n "$TYPO3_ORG_USERNAME" ] && [ -n "$TYPO3_ORG_PASSWORD" ]; then
+            echo;
+            echo "Preparing upload of release ${TRAVIS_TAG} to TER";
+            echo;
+            echo;
+            composer install --no-dev;
+            composer require helhum/ter-client dev-master;
+
+            # Cleanup before we upload
+            git reset --hard HEAD && git clean -fx;
+
+            # Upload
+            TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`;
+            echo;
+            echo "Uploading release ${TRAVIS_TAG} to TER";
+            echo;
+            echo;
+            .Build/bin/ter-client upload hosts_pattern . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE";
+          fi
+
+    - stage: sonarqube scanner
+      if: type = push AND branch IN (master, pre-merge)
+      php: 7.1
+      env: TYPO3=^8.7
+      before_install: skip
+      install:
+        - composer require typo3/cms="$TYPO3"
+        - mkdir -p .Build/Web/typo3conf/ext/ .Log/coverage/ .Log/log/
+        - export TYPO3_PATH_ROOT=$PWD/.Build/Web
+      before_script:
+      script:
+        - >
+          echo;
+          echo "Running unit tests";
+          echo;
+          echo;
+          .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml --log-junit .Log/log/functional.xml --coverage-php .Log/coverage/functional.cov --whitelist Classes Tests/Unit/;
+
+        - >
+          echo;
+          echo "Merging log and coverage files";
+          echo;
+          echo;
+          .Build/bin/phpunit-merger coverage .Log/coverage/ .Log/coverage.xml;
+          .Build/bin/phpunit-merger log .Log/log/ .Log/log.xml;
+
+        - git fetch --unshallow || true
+
+        - >
+          echo;
+          echo "Running SonarQube Scanner";
+          echo;
+          echo;
+          sonar-scanner;
