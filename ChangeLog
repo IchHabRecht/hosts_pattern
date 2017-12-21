@@ -1,3 +1,6 @@
+2017-12-21         [RELEASE] Release of hosts_pattern 2.3.0 (Nicole Cordes)
+2017-12-21 5df2ae9 [TASK] Add TYPO3 9.0 to extension constraints and Travis CI (Nicole Cordes)
+
 2017-12-21         [RELEASE] Release of hosts_pattern 2.2.0 (Nicole Cordes)
 2017-12-21 83c28a7 [FEATURE] Add new stage to automatically publish to TER (Nicole Cordes)
 2017-12-21 186e4ad [TASK] Add README.md (Nicole Cordes)
