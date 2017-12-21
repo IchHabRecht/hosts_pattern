@@ -1,7 +1,7 @@
 {
   "name": "ichhabrecht/hosts-pattern",
   "type": "typo3-cms-extension",
-  "description": "Generate trustedHostsPattern configuration from existing domain records",
+  "description": "Set TYPO3_CONF_VARS['SYS']['trustedHostsPattern'] depending on available sys_domain records",
   "keywords": [
     "TYPO3",
     "trustedHostsPattern",
