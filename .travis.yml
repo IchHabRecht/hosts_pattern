@@ -25,7 +25,12 @@ before_install:
 
 install:
   - if [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer remove --dev --no-update nimut/phpunit-merger; fi;
-  - composer require typo3/cms="$TYPO3"
+  - >
+    if [ "$TYPO3" == "dev-master" ]; then
+      composer config minimum-stability dev;
+      composer require typo3/cms-core="dev-master" --no-update;
+    fi
+  - composer require nimut/typo3-complete="$TYPO3"
   - export TYPO3_PATH_ROOT=$PWD/.Build/Web
 
 script:
@@ -45,13 +50,21 @@ script:
 
 jobs:
   fast_finish: true
+  allow_failures:
+    - env: TYPO3=dev-master
   include:
     - stage: test
       php: 7.2
-      env: TYPO3=^8.0
+      env: TYPO3=dev-master
+    - stage: test
+      php: 7.2
+      env: TYPO3=^9.0
+    - stage: test
+      php: 7.2
+      env: TYPO3=^8.7
     - stage: test
       php: 7.1
-      env: TYPO3=^8.0
+      env: TYPO3=^8.7
     - stage: test
       php: 7.1
       env: TYPO3=^7.6
@@ -98,11 +111,11 @@ jobs:
 
     - stage: sonarqube scanner
       if: type = push AND branch IN (master, pre-merge)
-      php: 7.1
-      env: TYPO3=^8.7
+      php: 7.2
+      env: TYPO3=^9.0
       before_install: skip
       install:
-        - composer require typo3/cms="$TYPO3"
+        - composer require nimut/typo3-complete="$TYPO3"
         - mkdir -p .Build/Web/typo3conf/ext/ .Log/coverage/ .Log/log/
         - export TYPO3_PATH_ROOT=$PWD/.Build/Web
       before_script:
