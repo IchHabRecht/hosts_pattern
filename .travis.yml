@@ -26,8 +26,9 @@ before_install:
 install:
   - if [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer remove --dev --no-update nimut/phpunit-merger; fi;
   - >
-    if [ "$TYPO3" == "dev-master" ]; then
+    if [[ "$TYPO3" = *"dev"* ]]; then
       composer config minimum-stability dev;
+      composer config prefer-stable true;
       composer require typo3/cms-core="dev-master" --no-update;
     fi
   - composer require nimut/typo3-complete="$TYPO3"
