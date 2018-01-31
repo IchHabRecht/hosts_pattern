@@ -1,3 +1,6 @@
+2018-01-31         [RELEASE] Release of hosts_pattern 2.3.1 (Nicole Cordes)
+2018-01-31 969da4c [TASK] Raise TYPO3 dependencies to include 9.1 (Nicole Cordes)
+
 2017-12-21         [RELEASE] Release of hosts_pattern 2.3.0 (Nicole Cordes)
 2017-12-21 5df2ae9 [TASK] Add TYPO3 9.0 to extension constraints and Travis CI (Nicole Cordes)
 
