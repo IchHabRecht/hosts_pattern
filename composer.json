@@ -47,7 +47,9 @@
   },
   "extra": {
     "typo3/cms": {
+      "extension-key": "hosts_pattern",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "app-dir": ".Build",
       "web-dir": ".Build/Web"
     }
   }
