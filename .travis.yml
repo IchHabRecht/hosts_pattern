@@ -24,12 +24,12 @@ before_install:
   - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
 
 install:
-  - if [ "$TRAVIS_PHP_VERSION" == "5.5" ] || [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer remove --dev --no-update nimut/phpunit-merger; fi;
   - >
     if [[ "$TYPO3" = *"dev"* ]]; then
       composer config minimum-stability dev;
       composer config prefer-stable true;
       composer require typo3/cms-core="dev-master" --no-update;
+      composer require typo3/cms-extbase="dev-master" --no-update;
     fi
   - composer require nimut/typo3-complete="$TYPO3"
   - export TYPO3_PATH_ROOT=$PWD/.Build/Web
@@ -59,7 +59,10 @@ jobs:
       env: TYPO3=dev-master
     - stage: test
       php: 7.2
-      env: TYPO3=~9.1.0
+      env: TYPO3=~9.2.0
+    - stage: test
+      php: 7.2
+      env: TYPO3=~9.1.1
     - stage: test
       php: 7.2
       env: TYPO3=~9.0.2
@@ -136,6 +139,7 @@ jobs:
           echo "Merging log and coverage files";
           echo;
           echo;
+          composer require --update-with-all-dependencies nimut/phpunit-merger;
           .Build/bin/phpunit-merger coverage .Log/coverage/ .Log/coverage.xml;
           .Build/bin/phpunit-merger log .Log/log/ .Log/log.xml;
 
