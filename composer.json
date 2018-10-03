@@ -7,7 +7,7 @@
     "trustedHostsPattern",
     "domain"
   ],
-  "homepage": "https://github.com/IchHabRecht/TYPO3-hosts_pattern",
+  "homepage": "https://github.com/IchHabRecht/hosts_pattern",
   "authors": [
     {
       "name": "Nicole Cordes",
@@ -33,8 +33,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "IchHabRecht\\HostsPattern\\Tests\\": "Tests/",
-      "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+      "IchHabRecht\\HostsPattern\\Tests\\": "Tests/"
     }
   },
   "replace": {
@@ -50,7 +49,7 @@
       "extension-key": "hosts_pattern",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "app-dir": ".Build",
-      "web-dir": ".Build/Web"
+      "web-dir": ".Build/public"
     }
   }
 }
