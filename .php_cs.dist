@@ -1,8 +1,17 @@
 <?php
 $header = <<<'EOF'
-This file is part of the TYPO3 extension hosts_pattern.
-
-(c) Nicole Cordes <typo3@cordes.co>
+/*
+ * This file is part of the TYPO3 extension hosts_pattern.
+ *
+ * (c) Nicole Cordes <typo3@cordes.co>
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 EOF;
 
 return PhpCsFixer\Config::create()
@@ -17,6 +26,8 @@ return PhpCsFixer\Config::create()
         'concat_space' => [
             'spacing' => 'one',
         ],
+        'declare_equal_normalize' => ['space' => 'single'],
+        'declare_strict_types' => true,
         'function_typehint_space' => true,
         'hash_to_slash_comment' => true,
         'linebreak_after_opening_tag' => true,
@@ -61,7 +72,9 @@ return PhpCsFixer\Config::create()
         'no_useless_return' => true,
         'no_whitespace_before_comma_in_array' => true,
         'no_whitespace_in_blank_line' => true,
+        'non_printable_character' => true,
         'normalize_index_brace' => true,
+        'object_operator_without_whitespace' => true,
         'ordered_imports' => true,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_annotation_without_dot' => true,
@@ -73,7 +86,9 @@ return PhpCsFixer\Config::create()
         'phpdoc_single_line_var_spacing' => true,
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
+        'self_accessor' => true,
         'phpdoc_var_without_name' => true,
+        'return_type_declaration' => ['space_before' => 'none'],
         'short_scalar_cast' => true,
         'single_quote' => true,
         'standardize_not_equals' => true,
@@ -88,4 +103,6 @@ return PhpCsFixer\Config::create()
             ->exclude('doc')
             ->exclude('Resources')
             ->notName('ext_emconf.php')
+            ->notName('ext_localconf.php')
+            ->notName('ext_tables.php')
     );

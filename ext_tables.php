@@ -13,7 +13,7 @@ if (TYPO3_MODE === 'BE') {
             'Domain' => 'index',
         ],
         [
-            'access' => 'admin',
+            'access' => version_compare(TYPO3_version, '9', '>=') ? 'systemMaintainer' : 'admin',
             'icon' => 'EXT:hosts_pattern/Resources/Public/Icons/module-hostspattern.svg',
             'labels' => 'LLL:EXT:hosts_pattern/Resources/Private/Language/locallang_mod.xml',
         ]

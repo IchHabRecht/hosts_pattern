@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array (
   'category' => 'module',
   'author' => 'Nicole Cordes',
   'author_email' => 'typo3@cordes.co',
-  'author_company' => 'CPS-IT GmbH',
+  'author_company' => 'biz-design',
   'state' => 'stable',
   'uploadfolder' => 0,
   'createDirs' => '',
@@ -26,7 +26,7 @@ $EM_CONF[$_EXTKEY] = array (
   array (
     'depends' => 
     array (
-      'typo3' => '7.6.0-9.2.99',
+      'typo3' => '7.6.0-9.5.99',
     ),
     'conflicts' => 
     array (
