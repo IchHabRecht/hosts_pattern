@@ -23,9 +23,6 @@
   "require-dev": {
     "nimut/testing-framework": "2.x-dev || 4.x-dev"
   },
-  "suggest": {
-    "friendsofphp/php-cs-fixer": "Tool to automatically fix PHP coding standards issues"
-  },
   "autoload": {
     "psr-4": {
       "IchHabRecht\\HostsPattern\\": "Classes/"
@@ -37,7 +34,6 @@
     }
   },
   "replace": {
-    "hosts_pattern": "self.version",
     "typo3-ter/hosts-pattern": "self.version"
   },
   "config": {

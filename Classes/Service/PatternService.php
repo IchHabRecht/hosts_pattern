@@ -1,4 +1,5 @@
 <?php
+
 namespace IchHabRecht\HostsPattern\Service;
 
 /***************************************************************
@@ -95,8 +96,10 @@ class PatternService
             $subdomainArray = array_filter($subdomainArray, 'strlen');
         }
         $hasMultipleSubdomains = count($subdomainArray) > 1;
-        $pattern = ($hasMultipleSubdomains ? '(' : '') . implode('|',
-                $subdomainArray) . ($hasMultipleSubdomains ? ')' : '');
+        $pattern = ($hasMultipleSubdomains ? '(' : '') . implode(
+            '|',
+            $subdomainArray
+        ) . ($hasMultipleSubdomains ? ')' : '');
         if (!empty($subdomainArray)) {
             $pattern .= '\\.';
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace IchHabRecht\HostsPattern\Tests\Unit;
 
 /***************************************************************
@@ -132,8 +133,10 @@ class PatternServiceTest extends UnitTestCase
      */
     public function generatePatternReturnsPatternForGivenDomains($domainArray, $expectedPattern)
     {
-        $this->assertSame($expectedPattern,
-            $this->fixture->generatePattern($this->getDomainObjectsFromArray($domainArray)));
+        $this->assertSame(
+            $expectedPattern,
+            $this->fixture->generatePattern($this->getDomainObjectsFromArray($domainArray))
+        );
     }
 
     /**
