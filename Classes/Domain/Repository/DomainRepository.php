@@ -1,5 +1,4 @@
 <?php
-
 namespace IchHabRecht\HostsPattern\Domain\Repository;
 
 /***************************************************************
@@ -26,22 +25,32 @@ namespace IchHabRecht\HostsPattern\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use IchHabRecht\HostsPattern\Domain\Model\Domain;
+use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * Repository for domain records
- */
 class DomainRepository extends Repository
 {
-    /**
-     * @return void
-     */
-    public function initializeObject()
+    public function findAll(): array
     {
-        /** @var QuerySettingsInterface $defaultQuerySettings */
-        $defaultQuerySettings = $this->objectManager->get(QuerySettingsInterface::class);
-        $defaultQuerySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($defaultQuerySettings);
+        $domains = [];
+        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+        $sites = $siteFinder->getAllSites(false);
+        foreach ($sites as $site) {
+            $siteConfiguration = $site->getConfiguration();
+            if (array_key_exists('baseVariants', $siteConfiguration)) {
+                foreach ($siteConfiguration['baseVariants'] as $baseVariant) {
+                    $domain = GeneralUtility::makeInstance(Domain::class);
+                    $domain->setDomainName($baseVariant['base']);
+                    $domains[] = $domain;
+                }
+            } else {
+                $domain = GeneralUtility::makeInstance(Domain::class);
+                $domain->setDomainName($siteConfiguration['base']);
+                $domains[] = $domain;
+            }
+        }
+        return $domains;
     }
 }

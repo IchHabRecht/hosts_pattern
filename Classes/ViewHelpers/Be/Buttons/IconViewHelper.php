@@ -1,5 +1,4 @@
 <?php
-
 namespace IchHabRecht\HostsPattern\ViewHelpers\Be\Buttons;
 
 /***************************************************************
@@ -30,14 +29,13 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Type\Icon\IconState;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class Tx_HostsPattern_ViewHelpers_Be_Buttons_IconViewHelper to render sprite icons
+ * Class IconViewHelper to render sprite icons
  */
-class IconViewHelper extends AbstractViewHelper implements CompilableInterface
+class IconViewHelper extends AbstractViewHelper
 {
     /**
      * View helper returns HTML, thus we need to disable output escaping
@@ -59,10 +57,8 @@ class IconViewHelper extends AbstractViewHelper implements CompilableInterface
 
     /**
      * Renders an sprite icon
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return static::renderStatic(
             $this->arguments,

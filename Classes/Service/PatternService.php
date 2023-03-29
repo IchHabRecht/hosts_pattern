@@ -1,5 +1,4 @@
 <?php
-
 namespace IchHabRecht\HostsPattern\Service;
 
 /***************************************************************
@@ -38,7 +37,7 @@ class PatternService
      * @param Domain[] $domainArray
      * @return string
      */
-    public function generatePattern($domainArray)
+    public function generatePattern($domainArray): string
     {
         if (empty($domainArray)) {
             $domain = new Domain();
@@ -60,11 +59,10 @@ class PatternService
      * @param Domain[] $domainArray
      * @return array
      */
-    protected function extractDomains($domainArray)
+    protected function extractDomains($domainArray): array
     {
         $extractedDomainArray = [];
 
-        /** @var Domain $domain */
         foreach ($domainArray as $domain) {
             $reverseHost = array_reverse(explode('.', $domain->getDomainName()));
             $domainName = preg_quote($reverseHost[1] . '.' . $reverseHost[0]);
@@ -83,12 +81,7 @@ class PatternService
         return $extractedDomainArray;
     }
 
-    /**
-     * @param string $domainName
-     * @param array $subdomainArray
-     * @return string
-     */
-    protected function getPatternForDomain($domainName, $subdomainArray)
+    protected function getPatternForDomain(string $domainName, array $subdomainArray): string
     {
         $hasDomainWithoutSubdomain = false;
         if (in_array('', $subdomainArray)) {

@@ -1,5 +1,4 @@
 <?php
-
 namespace IchHabRecht\HostsPattern\Domain\Model;
 
 /***************************************************************
@@ -26,31 +25,18 @@ namespace IchHabRecht\HostsPattern\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 
-/**
- * Domain model
- */
-class Domain extends AbstractEntity
+class Domain extends AbstractValueObject
 {
-    /**
-     * @var string
-     */
-    protected $domainName;
+    protected string $domainName;
 
-    /**
-     * @return string
-     */
-    public function getDomainName()
+    public function getDomainName(): string
     {
         return $this->domainName;
     }
 
-    /**
-     * @param string $domainName
-     * @return void
-     */
-    public function setDomainName($domainName)
+    public function setDomainName(string $domainName): void
     {
         $this->domainName = $domainName;
     }

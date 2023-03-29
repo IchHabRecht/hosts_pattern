@@ -1,5 +1,4 @@
 <?php
-
 namespace IchHabRecht\HostsPattern\Controller;
 
 /***************************************************************
@@ -30,57 +29,33 @@ use IchHabRecht\HostsPattern\Domain\Model\Domain;
 use IchHabRecht\HostsPattern\Domain\Repository\DomainRepository;
 use IchHabRecht\HostsPattern\Service\PatternService;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
-use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 
-/**
- * Controller for backend module
- */
 class DomainController extends ActionController
 {
-    /**
-     * @var DomainRepository;
-     */
-    protected $domainRepository;
+    protected DomainRepository $domainRepository;
+    protected PatternService $patternService;
 
-    /**
-     * @var PatternService
-     */
-    protected $patternService;
-
-    /**
-     * View object name
-     *
-     * @var string
-     */
     protected $defaultViewObjectName = BackendTemplateView::class;
 
-    /**
-     * @param DomainRepository $domainRepository
-     */
     public function injectDomainRepository(DomainRepository $domainRepository)
     {
         $this->domainRepository = $domainRepository;
     }
 
-    /**
-     * @param PatternService $patternService
-     * @return void
-     */
-    public function injectPatternService(PatternService $patternService)
+    public function injectPatternService(PatternService $patternService): void
     {
         $this->patternService = $patternService;
     }
 
-    /**
-     * @return void
-     */
-    public function indexAction()
+    public function indexAction(): void
     {
         $domains = $this->domainRepository->findAll();
         if (!count($domains)) {
-            $domain = $this->objectManager->get(Domain::class);
+            /** @var Domain $domain */
+            $domain = GeneralUtility::makeInstance(Domain::class);
             $domain->setDomainName(GeneralUtility::getIndpEnv('HTTP_HOST'));
             $domains = [$domain];
         }
@@ -88,7 +63,7 @@ class DomainController extends ActionController
 
         if ($this->request->hasArgument('write')) {
             /** @var ConfigurationManager $configurationManager */
-            $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+            $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $configurationManager->setLocalConfigurationValueByPath('SYS/trustedHostsPattern', $pattern);
             $this->addFlashMessage(
                 htmlspecialchars('$GLOBALS[TYPO3_CONF_VARS][SYS][trustedHostsPattern] = ' . $pattern),
