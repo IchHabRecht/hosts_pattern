@@ -1,4 +1,5 @@
 <?php
+
 namespace IchHabRecht\HostsPattern\Domain\Repository;
 
 /***************************************************************
@@ -51,6 +52,7 @@ class DomainRepository extends Repository
                 $domains[] = $domain;
             }
         }
+
         return $domains;
     }
 }
