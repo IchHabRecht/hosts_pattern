@@ -29,10 +29,10 @@ namespace IchHabRecht\HostsPattern\Controller;
 use IchHabRecht\HostsPattern\Domain\Model\Domain;
 use IchHabRecht\HostsPattern\Domain\Repository\DomainRepository;
 use IchHabRecht\HostsPattern\Service\PatternService;
+use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Core\Configuration\ConfigurationManager;
 
 class DomainController extends ActionController
 {
